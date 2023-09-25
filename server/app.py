@@ -64,6 +64,16 @@ class RestaurantsByID(Resource):
         )
 
         return response
+    
+    def delete(self, id):
+        restaurant = Restaurant.query.filter(Restaurant.id == id).first()
+        if restaurant:
+            db.session.delete(restaurant)
+            db.session.commit()
+            response = make_response(jsonify({"message": "Restaurant deleted"}), 200)
+        else:       
+            response = make_response(jsonify({"error": "Restaurant not found"}), 404)
+        return response
 
 api.add_resource(RestaurantsByID, '/restaurant/<int:id>')
 
