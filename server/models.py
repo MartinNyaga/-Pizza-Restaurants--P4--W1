@@ -58,7 +58,7 @@ class RestaurantPizza(db.Model):
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
     
-    serialize_rules = ('-restaurant.restaurant_pizzas', '-pizza.restaurant_pizzas',)
+    serialize_rules = ('-restaurant.pizza.restaurant_pizzas', '-pizza.restaurant.restaurant_pizzas',)
 
     @validates('price')
     def validate_price(self, key, amount):
