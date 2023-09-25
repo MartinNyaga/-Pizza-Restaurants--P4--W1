@@ -1,0 +1,394 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Pizza and restaurant API - OpenAPI 3.0",
+      "description": "This is a flask Pizza and restaurant API",
+      "termsOfService": "http://swagger.io/terms/",
+      "contact": {
+        "email": "apiteam@swagger.io"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      },
+      "version": "1.0.11"
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    },
+    "servers": [
+      {
+        "url": "https://petstore3.swagger.io/api/v3"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Restaurants",
+        "description": "Everything about your Restaurants",
+        "externalDocs": {
+          "description": "Find out more",
+          "url": "http://swagger.io"
+        }
+      },
+      {
+        "name": "Pizza",
+        "description": "Access to Pizza data",
+        "externalDocs": {
+          "description": "Find out more about Restaurants",
+          "url": "http://swagger.io"
+        }
+      },
+      {
+        "name": "Pizzas and Restaurants",
+        "description": "Operations about pizzas and restaurants"
+      }
+    ],
+    "paths": {
+      "/restaurant": {
+        "get": {
+          "tags": [
+            "restaurants"
+          ],
+          "summary": "View all restaurants",
+          "description": "List all the restaurants",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Restaurant"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Restaurant"
+                  }
+                }
+              }
+            },
+            "405": {
+              "description": "Invalid input"
+            }
+          },
+          "security": [
+            {
+              "petstore_auth": [
+                "write:pets",
+                "read:pets"
+              ]
+            }
+          ]
+        }
+      },
+      "/restaurantbyid/{id}": {
+        "get": {
+          "tags": [
+            "restaurants"
+          ],
+          "summary": "Finds Restaurant by Id",
+          "description": "View the detail of a singe restaurant",
+          "operationId": "findRestaurantsById",
+          "parameters": [
+            {
+              "name": "status",
+              "in": "query",
+              "description": "Id that need to be considered for filter",
+              "required": false,
+              "explode": true,
+              "schema": {
+                "type": "string",
+                "default": "available",
+                "enum": [
+                  "available",
+                  "pending",
+                  "sold"
+                ]
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Restaurant"
+                    }
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Restaurant"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid status value"
+            }
+          },
+          "security": [
+            {
+              "petstore_auth": [
+                "write:pets",
+                "read:pets"
+              ]
+            }
+          ]
+        },
+        "delete": {
+          "tags": [
+            "restaurants"
+          ],
+          "summary": "Deletes a Restaurant",
+          "description": "delete a Restaurant",
+          "operationId": "deleteRestaurant",
+          "parameters": [
+            {
+              "name": "api_key",
+              "in": "header",
+              "description": "",
+              "required": false,
+              "schema": {
+                "type": "/restaurantbyid/id"
+              }
+            },
+            {
+              "name": {
+                "restaurantId": null
+              },
+              "in": "path",
+              "description": "Restaurant id to delete",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid Restaurant Id"
+            }
+          },
+          "security": [
+            {
+              "petstore_auth": [
+                "write:restaurants",
+                "read:restaurants"
+              ]
+            }
+          ]
+        }
+      },
+      "/pizzas": {
+        "get": {
+          "tags": [
+            "pizzas"
+          ],
+          "summary": "View all the pizzas",
+          "description": "List of all pizzas",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pizza"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pizza"
+                  }
+                }
+              }
+            },
+            "405": {
+              "description": "Invalid input"
+            }
+          },
+          "security": [
+            {
+              "petstore_auth": [
+                "write:pets",
+                "read:pets"
+              ]
+            }
+          ]
+        }
+      },
+      "/restaurant_pizza": {
+        "post": {
+          "tags": [
+            "RestaurantPizza"
+          ],
+          "summary": "Creates list of restaurant pizzas",
+          "description": "Creates list of restaurant pizzas with given input array",
+          "operationId": "createRestaurantPizzas",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RestaurantPizza"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pizza"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pizza"
+                  }
+                }
+              }
+            },
+            "default": {
+              "description": "successful operation"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Restaurant": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64",
+              "example": 10
+            },
+            "name": {
+              "type": "string",
+              "example": "Arnold"
+            },
+            "address": {
+              "type": "string",
+              "example": "Kilimani"
+            }
+          },
+          "xml": {
+            "name": "restaurant"
+          }
+        },
+        "Pizza": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64",
+              "example": 100000
+            },
+            "name": {
+              "type": "string",
+              "example": "beef"
+            },
+            "ingredients": {
+              "type": "string",
+              "example": "meat"
+            }
+          },
+          "xml": {
+            "name": "pizza"
+          }
+        },
+        "RestaurantPizza": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64",
+              "example": 100000
+            },
+            "pizza_id": {
+              "type": "integer",
+              "format": "int64",
+              "example": 100000
+            },
+            "restaurant_id": {
+              "type": "integer",
+              "format": "int64",
+              "example": 100000
+            },
+            "price": {
+              "type": "integer",
+              "format": "int64",
+              "example": 100000
+            }
+          },
+          "xml": {
+            "name": "restaurantpizza"
+          }
+        }
+      },
+      "requestBodies": {
+        "Restaurant": {
+          "description": "List of restaurants",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Restaurant"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Restaurant"
+              }
+            }
+          }
+        },
+        "Pizza": {
+          "description": "List of pizzas",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Pizza"
+                }
+              }
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "petstore_auth": {
+          "type": "oauth2",
+          "flows": {
+            "implicit": {
+              "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+              "scopes": {
+                "write:pets": "modify pets in your account",
+                "read:pets": "read your pets"
+              }
+            }
+          }
+        },
+        "api_key": {
+          "type": "apiKey",
+          "name": "api_key",
+          "in": "header"
+        }
+      }
+    }
+  }

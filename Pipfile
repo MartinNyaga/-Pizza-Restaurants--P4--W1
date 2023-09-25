@@ -14,6 +14,7 @@ importlib-resources = "*"
 ipdb = "*"
 marshmallow = "*"
 sqlalchemy-serializer = "*"
+flask-swagger-ui = "*"
 
 [dev-packages]
 
