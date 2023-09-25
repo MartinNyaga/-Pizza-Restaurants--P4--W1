@@ -20,8 +20,9 @@ class Home(Resource):
     def get(self):
         
         response_dict = {
-            "message": "Welcome to the Restaurants API, Follow endpoints below",
+            "/pizza": "Getting pizza resource",
             "/restaurant":"This gets you access to all restaurants",
+            "message": "Welcome to the Restaurants API, Follow endpoints below",
         }
         
         response = make_response(
@@ -92,6 +93,24 @@ class Pizzas(Resource):
         response = make_response(jsonify(pizza_list), 200)
         return response
 api.add_resource(Pizzas, '/pizza')
+
+class RestaurantPizzas(Resource):
+    
+    def post(self):
+        new_record = RestaurantPizza(
+        price = request.form['price'],
+        pizza_id = request.form['pizza_id'],
+        restaurant_id = request.form['restaurant_id']
+        )
+        db.session.add(new_record)
+        db.session.commit()
+        
+        record_dict = new_record.to_dict()
+        response = make_response(jsonify(record_dict), 201)
+        
+        return response
+    
+api.add_resource(RestaurantPizzas, '/restaurantpizzas')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
