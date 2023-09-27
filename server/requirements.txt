@@ -1,0 +1,13 @@
+Faker
+Flask
+Flask-SQLAlchemy
+importlib-metadata
+importlib-resources
+sqlalchemy-serializer
+sqlalchemy
+ipdb
+pytest
+flask-migrate
+flask-restful
+flask-swagger-ui
+gunicorn

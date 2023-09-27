@@ -15,6 +15,7 @@ ipdb = "*"
 marshmallow = "*"
 sqlalchemy-serializer = "*"
 flask-swagger-ui = "*"
+gunicorn = "*"
 
 [dev-packages]
 
