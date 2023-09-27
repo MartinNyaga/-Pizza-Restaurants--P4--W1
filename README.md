@@ -165,6 +165,10 @@ If the `RestaurantPizza` is not created successfully, return the following JSON 
 5. Navigate to the server folder.
 6. Run the `app.py` script.
 7. Test your endpoints with the given routes in postman.
+    - /restaurant - gives you a list of all restaurants
+    - /restaurant/{id} - gives you a restaurant with specific id
+    - /pizza - gives you a list of pizzas
+    - /api/docs - gives you the api documentation from swagger
 
 
 ## Known Bugs

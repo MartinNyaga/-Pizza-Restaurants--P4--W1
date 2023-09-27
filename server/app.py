@@ -45,6 +45,8 @@ class Home(Resource):
         
         response_dict = {
             "/pizza": "Getting pizza resource",
+            "/restaurant/{id}": "gives you a restaurant with specific id",
+            "/api/docs": "gives you the api documentation from swagger",
             "/restaurant":"This gets you access to all restaurants",
             "message": "Welcome to the Restaurants API, Follow endpoints below",
         }
